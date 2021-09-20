@@ -1,11 +1,10 @@
 # Brahma.FSharp.MatrixMultiply
 
-This tool multiplies dense matrices using [Brahma.FSharp](https://github.com/YaccConstructor/Brahma.FSharp)
+This tool multiplies dense float matrices using [Brahma.FSharp](https://github.com/YaccConstructor/Brahma.FSharp)
 
 ---
 
 ## Builds
-
 
 GitHub Actions |
 :---: |
@@ -23,9 +22,7 @@ The available console commands are listed below:
     --firstmatrix <file>  File that contains first matrix
     --secondmatrix <file> File that contains second matrixe
     --outputfile <file>   File that will contain the result of multiplication
-    --platform <nvidia|amd|any>
-                          Platform for openCL. Make sure openCL is installed. Run "clinfo" to check your platforms.
-                          Options:"NVIDIA", "AMD", "Any"
+    --platform <nvidia|amd|any> Platform for openCL. Make sure openCL is installed. Run "clinfo" to check your platforms. Options:"NVIDIA", "AMD", "Any"
     --help                display this list of options.
 
 ### Matrix format
@@ -52,7 +49,7 @@ Non-rectangular matrix
     1 2 3
     1 2  
     4
-    
+
 Not numeric matrix
 
     1 2 3
