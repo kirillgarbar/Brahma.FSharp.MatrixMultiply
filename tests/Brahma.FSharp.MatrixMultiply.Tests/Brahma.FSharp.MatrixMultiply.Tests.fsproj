@@ -9,6 +9,7 @@
         <Compile Include="AssemblyInfo.fs" />
         <Compile Include="Tests.fs" />
         <Compile Include="Main.fs" />
+        <None Include="app.config" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Expecto.FsCheck" Version="9.0.2" />
