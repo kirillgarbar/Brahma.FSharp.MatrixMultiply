@@ -17,8 +17,9 @@ GitHub Actions |
 ## How to use it
 
 This project implements a custom console interface via [Argu](https://github.com/fsprojects/Argu)
+
 The available console commands are listed below:
-#
+
     --firstmatrix <file>  File that contains first matrix
     --secondmatrix <file> File that contains second matrixe
     --outputfile <file>   File that will contain the result of multiplication
@@ -32,24 +33,28 @@ The available console commands are listed below:
 Matrices are stored in text files (.txt)
 
 #### Correct format
-#
+
     1.0 27.543 12.5
     78.4 14.15 88.2
     100.0 15.7 20.4
+
 Using integers is also allowed
-#
+
     1 27 12.5
     78.4 14 88.2
     100.0 15 20.4
+
 #### Incorrect format
+
 Non-rectangular matrix
-# 
+ 
     1 2 3
     1 2 3
     1 2  
     4
+    
 Not numeric matrix
-#
+
     1 2 3
     a b c
     1 2 3
