@@ -30,10 +30,18 @@ module Tests =
                 let colsrows = abs(c) % 64 + 1
                 let m1 = genRandomMatrix rows colsrows
                 let m2 = genRandomMatrix colsrows cols
-                printfn "%A" "a"
                 let m3 = MatrixMultiply.multiply "NVIDIA*" m1 rows colsrows m2 colsrows cols
                 let m3Standard = multiplyStandard m1 rows colsrows m2 colsrows cols
                 Expect.equal m3Standard m3 "Mupltiply is wrong"
+
+            testCase "Wrong sized matrices multiply attempt" <| fun _ ->
+                let r1 = 5
+                let c1 = 10
+                let r2 = 8
+                let c2 = 7
+                let m1 = genRandomMatrix r1 c1
+                let m2 = genRandomMatrix r2 c2
+                Expect.throws (fun _ -> MatrixMultiply.multiply "NVIDIA*" m1 r1 c1 m2 r2 c2 |> ignore) "Exception should be raised"
         ]
     [<Tests>]
     let matrixIOTests =
