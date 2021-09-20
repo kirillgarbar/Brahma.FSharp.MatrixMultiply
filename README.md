@@ -56,6 +56,10 @@ Not numeric matrix
     a b c
     1 2 3
 
+### Example
+
+    >Brahma.FSharp.MatrixMultiply.exe --firstmatrix "1.txt" --secondmatrix "2.txt" --outputfile "3.txt" --platform "NVIDIA"
+
 ## Requirments
 
   * .NET 5.0 or greater
