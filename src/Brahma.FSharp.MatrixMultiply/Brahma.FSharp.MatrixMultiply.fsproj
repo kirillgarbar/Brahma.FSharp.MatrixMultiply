@@ -16,6 +16,7 @@
     <ItemGroup>
         <Compile Include="AssemblyInfo.fs" />
         <None Include="App.config" />
+        <Compile Include="MatrixIO.fs" />
         <Compile Include="MatrixMultiply.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>
