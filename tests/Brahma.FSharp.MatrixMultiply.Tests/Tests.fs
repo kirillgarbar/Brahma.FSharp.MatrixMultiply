@@ -2,14 +2,47 @@ namespace Brahma.FSharp.MatrixMultiply.Tests
 
 open Expecto
 open Brahma.FSharp.MatrixMultiply
+open MatrixIO
 
-module SayTests =
+module Tests =
+
+    let random = new System.Random()
+    
+    let genRandomMatrix rows cols =
+        Array.init (rows * cols) (fun i -> float (random.Next(100)))
+    
+    let multiplyStandard (a:array<_>) aRows aCols (b:array<_>) bRows bCols =
+        let c = Array.zeroCreate (aRows * bCols)
+        for i in 0 .. aRows - 1 do
+            for j in 0 .. bCols - 1 do
+                let mutable buf = 0.0
+                for k in 0 .. aCols - 1 do
+                     buf <- buf + a.[i * aCols + k] * b.[k * bCols + j]
+                c.[i * bCols + j] <- buf
+        c  
+
     [<Tests>]
-    let tests =
-        testList "samples"
-            [ testCase "Say nothing" <| fun _ ->
-                let subject = Say.nothing()
-                Expect.equal subject () "Not an absolute unit"
-              testCase "Say hello all" <| fun _ ->
-                  let subject = Say.hello "all"
-                  Expect.equal subject "Hello all" "You didn't say hello" ]
+    let matrixIOTests =
+        testList "MatrixIOTests" [
+            testProperty "writeMatrix and readMatrix id test" <| fun (a, b) ->
+                let rows = abs(a) % 64 + 1
+                let cols = abs(b) % 64 + 1
+                let matrix = genRandomMatrix rows cols
+                writeMatrix "writeAndReadMatrixTest.txt" matrix rows cols
+                let readMatrix = readMatrix "writeAndReadMatrixTest.txt"
+                Expect.equal (matrix, rows, cols) readMatrix "write and read should be id"
+
+            testCase "NonRectangular matrix read attempt" <| fun _ ->
+                let matrix = "1.0 1.0 1.0\n1.0 1.0".Split("\n")
+                System.IO.File.WriteAllLines("nonRectangularReadTest.txt", matrix)
+                Expect.throws (fun _ -> readMatrix "nonRectangularReadTest.txt" |> ignore) "Exception should be raised"
+
+            testCase "Wrong format matrix read attempt" <| fun _ ->
+                let matrix = "a b c\n1.0 1.0".Split("\n")
+                System.IO.File.WriteAllLines("wrongFormatReadTest.txt", matrix)
+                Expect.throws (fun _ -> readMatrix "wrongFormatReadTest.txt" |> ignore) "Exception should be raised"
+
+            testCase "Wrong sized matrix for write given" <| fun _ ->
+                let matrix = [| 1.0; 1.0; 1.0; 1.0; 1.0 |]
+                Expect.throws (fun _ -> writeMatrix "wrongSizedWriteTest.txt" matrix 2 3 |> ignore) "Exception should be raised"
+        ]
