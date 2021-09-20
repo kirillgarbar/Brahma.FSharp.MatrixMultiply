@@ -43,6 +43,15 @@ module Tests =
                 let m1 = genRandomMatrix r1 c1
                 let m2 = genRandomMatrix r2 c2
                 Expect.throws (fun _ -> MatrixMultiply.multiply "*" m1 r1 c1 m2 r2 c2 |> ignore) "Exception should be raised"
+
+            testCase "Wrong platform name given" <| fun _ ->
+                let r1 = 5
+                let c1 = 10
+                let r2 = 8
+                let c2 = 7
+                let m1 = genRandomMatrix r1 c1
+                let m2 = genRandomMatrix r2 c2
+                Expect.throws (fun _ -> MatrixMultiply.multiply "wrong" m1 r1 c1 m2 r2 c2 |> ignore) "Exception should be raised"
         ]
     [<Tests>]
     let matrixIOTests =
@@ -68,4 +77,7 @@ module Tests =
             testCase "Wrong sized matrix for write given" <| fun _ ->
                 let matrix = [| 1.0; 1.0; 1.0; 1.0; 1.0 |]
                 Expect.throws (fun _ -> writeMatrix "wrongSizedWriteTest.txt" matrix 2 3 |> ignore) "Exception should be raised"
+
+            testCase "File not found" <| fun _ ->
+                Expect.throws (fun _ -> readMatrix "UnexistingFile.txt" |> ignore) "Exception should be raised"
         ]
