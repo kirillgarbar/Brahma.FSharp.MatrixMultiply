@@ -22,7 +22,7 @@ module MatrixMultiply =
             @>
 
         let provider =
-            try  ComputeProvider.Create(platformName, DeviceType.Cpu)
+            try  ComputeProvider.Create(platformName, DeviceType.Default)
             with 
             | ex -> failwith ex.Message
 
