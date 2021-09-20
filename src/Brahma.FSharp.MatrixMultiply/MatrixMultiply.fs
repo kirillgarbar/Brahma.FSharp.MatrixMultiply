@@ -15,7 +15,7 @@ module MatrixMultiply =
                 fun (r:_2D) (a:array<_>) (b:array<_>) (c:array<_>) -> 
                     let tx = r.GlobalID0
                     let ty = r.GlobalID1
-                    let mutable buf = c.[ty * m2Cols + tx]
+                    let mutable buf = 0.0
                     for k in 0 .. m1Cols - 1 do
                         buf <- buf + (a.[ty * m1Cols + k] * b.[k * m2Cols + tx])
                     c.[ty * m2Cols + tx] <- buf
@@ -23,12 +23,12 @@ module MatrixMultiply =
 
         let provider =
             try  ComputeProvider.Create(platformName, DeviceType.Default)
-            with 
+            with
             | ex -> failwith ex.Message
 
         let mutable commandQueue = new CommandQueue(provider, provider.Devices |> Seq.head)
         let _, kernelPrepare, kernelRun = provider.Compile command
-        let dim = _2D(m1Rows, m2Cols)
+        let dim = _2D(m2Cols, m1Rows)
         let m3 = Array.zeroCreate(m1Rows * m2Cols)
         kernelPrepare dim m1 m2 m3
         

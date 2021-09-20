@@ -3,15 +3,18 @@ namespace Brahma.FSharp.MatrixMultiply
 module MatrixIO =
 
     let readMatrix filePath =
-        let input = System.IO.File.ReadAllLines(filePath)
-        let string2DArray = input |> Array.map (fun s -> s.Trim().Split())
-        let resultingArray = (input |> Array.map (fun s -> s.Trim()) |> String.concat " ").Split() |> Array.map (float)
-        let rows = string2DArray.Length
-        let cols = string2DArray.[0].Length
+        try
+            let input = System.IO.File.ReadAllLines(filePath)
+            let string2DArray = input |> Array.map (fun s -> s.Trim().Split())
+            let resultingArray = (input |> Array.map (fun s -> s.Trim()) |> String.concat " ").Split() |> Array.map (float)
+            let rows = string2DArray.Length
+            let cols = string2DArray.[0].Length
 
-        let isRectangular = Array.fold (fun isTrue (x:string[]) -> isTrue && (x.Length = cols)) true string2DArray
+            let isRectangular = Array.fold (fun isTrue (x:string[]) -> isTrue && (x.Length = cols)) true string2DArray
 
-        if isRectangular then (resultingArray, rows, cols) else failwith "Matrix should be rectangular"
+            if isRectangular then (resultingArray, rows, cols) else failwith "Matrix should be rectangular"
+        with
+        | :? System.FormatException -> failwith "Matrix should contain only numbers(\"1\" or \"1.0\")"
 
     let writeMatrix filePath (matrix:float[]) rows cols =
         if matrix.Length <> rows * cols then failwith "Size of array doesn't match with given dimensions"
