@@ -20,7 +20,21 @@ module Tests =
                      buf <- buf + a.[i * aCols + k] * b.[k * bCols + j]
                 c.[i * bCols + j] <- buf
         c  
-
+        
+    [<Tests>]
+    let matrixMultiplyTests =
+        testList "MatrixMultiplyTests" [
+            testProperty "Multiplying matrices" <| fun (a, b, c) ->
+                let rows = abs(a) % 64 + 1
+                let cols = abs(b) % 64 + 1
+                let colsrows = abs(c) % 64 + 1
+                let m1 = genRandomMatrix rows colsrows
+                let m2 = genRandomMatrix colsrows cols
+                printfn "%A" "a"
+                let m3 = MatrixMultiply.multiply "NVIDIA*" m1 rows colsrows m2 colsrows cols
+                let m3Standard = multiplyStandard m1 rows colsrows m2 colsrows cols
+                Expect.equal m3Standard m3 "Mupltiply is wrong"
+        ]
     [<Tests>]
     let matrixIOTests =
         testList "MatrixIOTests" [
