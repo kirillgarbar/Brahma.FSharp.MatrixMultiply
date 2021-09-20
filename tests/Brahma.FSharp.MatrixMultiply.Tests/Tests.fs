@@ -31,7 +31,7 @@ module Tests =
                 let colsrows = abs(c) % 64 + 1
                 let m1 = genRandomMatrix rows colsrows
                 let m2 = genRandomMatrix colsrows cols
-                let m3 = MatrixMultiply.multiply "*" m1 rows colsrows m2 colsrows cols
+                let m3 = MatrixMultiply.multiply "INTEL(R)" m1 rows colsrows m2 colsrows cols
                 let m3Standard = multiplyStandard m1 rows colsrows m2 colsrows cols
                 Expect.equal m3Standard m3 "Mupltiply is wrong"
               
