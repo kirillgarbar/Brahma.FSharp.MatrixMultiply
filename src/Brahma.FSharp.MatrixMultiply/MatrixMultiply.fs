@@ -22,8 +22,8 @@ module MatrixMultiply =
             @>
 
         let provider =
-            try  ComputeProvider.Create(deviceType = DeviceType.Default)
-            with
+            try  ComputeProvider.Create(platformName, DeviceType.Default)
+            with 
             | ex -> failwith ex.Message
 
         let mutable commandQueue = new CommandQueue(provider, provider.Devices |> Seq.head)
