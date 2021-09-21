@@ -41,7 +41,7 @@ jobs:
         CI: true
     - name: Build
       if: runner.os == 'Windows'
-      run:
+      run: |
         set NUGETDIR=C:\NUGET
         nuget install opencl-nug -Version 0.777.77 -OutputDirectory %NUGETDIR%
         dir %NUGETDIR%\opencl-nug.0.777.77\build\native\
