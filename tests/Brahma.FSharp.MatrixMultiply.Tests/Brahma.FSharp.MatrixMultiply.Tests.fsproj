@@ -9,9 +9,11 @@
         <Compile Include="AssemblyInfo.fs" />
         <Compile Include="Tests.fs" />
         <Compile Include="Main.fs" />
+        <None Include="app.config" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Expecto.FsCheck" Version="9.0.2" />
+      <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.12.8" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="../../src/Brahma.FSharp.MatrixMultiply/Brahma.FSharp.MatrixMultiply.fsproj" />
