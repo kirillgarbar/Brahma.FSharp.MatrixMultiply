@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -41,7 +41,15 @@ jobs:
         CI: true
     - name: Build
       if: runner.os == 'Windows'
-      run: ./build.cmd
+      run:
+        set NUGETDIR=C:\NUGET
+        nuget install opencl-nug -Version 0.777.77 -OutputDirectory %NUGETDIR%
+        dir %NUGETDIR%\opencl-nug.0.777.77\build\native\
+        set OCL_ROOT=%NUGETDIR%\opencl-nug.0.777.77\build\native
+        # Install OpenCL Runtime
+        choco install opencl-intel-cpu-runtime
+           
+        ./build.cmd
       env:
         # Work around https://github.com/actions/setup-dotnet/issues/29
         DOTNET_ROOT: ${{ runner.tool_cache }}/dncs/${{ matrix.dotnet }}/x64
