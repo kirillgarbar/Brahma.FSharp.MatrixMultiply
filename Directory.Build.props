@@ -10,4 +10,9 @@
         <RepositoryUrl>https://github.com/kirillgarbar/Brahma.FSharp.MatrixMultiply</RepositoryUrl>
         <!-- owners is not supported in MSBuild -->
     </PropertyGroup>
+        <ItemGroup>
+        <Content Include="YC.OpenCL.NET.dll.config">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 </Project>

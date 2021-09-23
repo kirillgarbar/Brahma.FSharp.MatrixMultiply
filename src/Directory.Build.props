@@ -4,9 +4,4 @@
         <IsTestProject>false</IsTestProject>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
-    <ItemGroup>
-        <Content Include="../YC.OpenCL.NET.dll.config">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
 </Project>
