@@ -11,7 +11,7 @@
         <!-- owners is not supported in MSBuild -->
     </PropertyGroup>
         <ItemGroup>
-        <Content Include="YC.OpenCL.NET.dll.config">
+        <Content Include="../../YC.OpenCL.NET.dll.config">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
